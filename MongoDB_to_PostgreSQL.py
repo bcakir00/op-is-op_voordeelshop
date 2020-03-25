@@ -18,7 +18,8 @@ def get_values(normalized, collection, values, get_fk):
     normalized_list = []
     upload_values = []
     for entry in collection.find():
-        print(counter)
+        if counter % 10000 == 0:
+            print(counter)
         upload = []
         for value in values:
             if value == "x":
@@ -96,8 +97,8 @@ if __name__ == "__main__":
     # create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"], ["_id", "sub_sub_category"])
     # create_table(True, "color", "products", ["x", "color"], ["_id", "color"])
     # create_table(True, "gender", "products", ["x", "gender"], ["_id", "gender"])
-    # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"], ["_id", "recommendation_segment", "order_count"])
+    create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"], ["_id", "recommendation_segment", "order_count"])
     # create_table(False, "sessions", "sessions", ["has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], ["sessions_id", "has_sale", "device_family", "device_brand", "os", "profid"], link_profile_session)
-    upload_file("brand", "brand")
+    # upload_file("brand", "brand")
     cursor.close()
     cnx.close()
