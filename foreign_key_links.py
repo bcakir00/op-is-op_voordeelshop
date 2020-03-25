@@ -1,6 +1,6 @@
 from MongoDB_to_PostgreSQL import *
 
-buids = ()
+buids = []
 
 
 def init():
@@ -8,16 +8,26 @@ def init():
 
 
 def get_buids():
-    counter = 0
     for entry in db["profiles"].find():
-        try:
-            for buid in entry["buids"]:
-                buids[buid] = counter
-        except KeyError:
-            continue
-        counter += 1
+        if "buids" in entry:
+            if len(entry["buids"]) > 0:
+                buids.append((entry["buids"][0], str(entry["_id"])))
+    buids.sort()
     print("Done with the setup of the buids.")
 
 
 def link_profile_session(entry):
-    return buids[entry["buid"][0]]
+    low = 0
+    high = len(buids) - 1
+    session_id = entry["buid"][0]
+
+    while low <= high:
+        middle = (low + high) // 2
+        if buids[middle][0] == session_id:
+            return buids[middle][1]
+        elif buids[middle][0] > session_id:
+            high = middle - 1
+        else:
+            low = middle + 1
+
+    return -1
