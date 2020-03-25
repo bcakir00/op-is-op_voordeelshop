@@ -1,6 +1,6 @@
 import psycopg2
 
-c = psycopg2.connect("dbname=postgres user=postgres password=postgres")  # TODO: edit this.
+c = psycopg2.connect("dbname=huwebshop user=postgres password=postgres")  # TODO: edit this.
 cur = c.cursor()
 
 
@@ -34,7 +34,8 @@ cur.execute("""CREATE TABLE profiles
 
 cur.execute("""CREATE TABLE sessions
                 (sessions_id VARCHAR PRIMARY KEY, 
-                has_sale BIT,
+                has_sale BOOLEAN,
+                device_family VARCHAR,
                 device_brand VARCHAR,
                 os VARCHAR,
                 profid VARCHAR,
