@@ -16,7 +16,6 @@ def get_buids():
         except KeyError:
             continue
         counter += 1
-    print(buids)
     print("Done with the setup of the buids.")
 
 

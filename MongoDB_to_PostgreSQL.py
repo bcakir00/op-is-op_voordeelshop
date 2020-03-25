@@ -1,6 +1,9 @@
 import psycopg2
 from pymongo import MongoClient
 from foreign_key_links import *
+import bson
+import csv
+import os
 
 cnx = psycopg2.connect("dbname=huwebshop user=postgres password=postgres")  # TODO: edit this.
 cursor = cnx.cursor()
@@ -15,22 +18,27 @@ def get_values(normalized, collection, values, get_fk):
     normalized_list = []
     upload_values = []
     for entry in collection.find():
-        upload = [counter]
+        upload = []
         for value in values:
-            if "-" in value:
-                array_value = value.split("-")
-                vl = entry
+            if value == "x":
+                upload = [counter]
+            elif "-" in value:
+                array_structure = value.split("-")
+                array_value = entry
                 try:
-                    for sep in array_value:
-                        vl = vl[sep]
+                    for sep in array_structure:
+                        array_value = array_value[sep]
                 except KeyError:
-                    vl = None
-                upload.append(vl)
+                    array_value = None
+                upload.append(array_value)
             elif value == "?":
                 upload.append(get_fk(entry))
             else:
                 if value in entry:
-                    upload.append(entry[value])
+                    if type(entry[value]) == bson.objectid.ObjectId:
+                        upload.append(str(entry[value]))
+                    else:
+                        upload.append(entry[value])
                 else:
                     upload.append(None)
 
@@ -45,17 +53,23 @@ def get_values(normalized, collection, values, get_fk):
     return upload_values
 
 
-def set_values(table_name, upload_values, headers):
-    parameters = ""
-    value_string = ""
-    for header in headers:
-        parameters += header + ","
-        value_string += "%s,"
-    parameters = parameters[:-1]
-    value_string = value_string[:-1]
+def get_path(file_name):
+    # Getting the path to save the file
+    script_dir = os.path.dirname(__file__)
+    rel_path = f"excel_files/{file_name}.csv"
+    abs_file_path = os.path.join(script_dir, rel_path)
+    return abs_file_path
 
-    cursor.executemany(f"INSERT INTO {table_name}({parameters}) VALUES ({value_string})", upload_values)
-    cnx.commit()
+
+def create_csv_file(table_name, upload_values, headers):
+    # Writing the upload values to a csv file.
+    print(f"Creating the {table_name} database contents...")
+    with open(get_path(table_name), 'w', newline='') as csvout:
+        writer = csv.DictWriter(csvout, fieldnames=headers)
+        writer.writeheader()
+        for value in upload_values:
+            writer.writerow({'_id': value[0], 'brand': value[1]})
+    print(f"Finished creating and uploading the {table_name} database contents.")
 
 
 def create_table(normalized, table_name, db_name, values, headers, get_fk=None):
@@ -63,19 +77,18 @@ def create_table(normalized, table_name, db_name, values, headers, get_fk=None):
     cursor.execute(f"DELETE FROM {table_name};")
 
     upload_values = get_values(normalized, collection, values, get_fk)
-    set_values(table_name, upload_values, headers)
-
-    print(f"{table_name} table uploaded using {db_name} database.")
+    create_csv_file(table_name, upload_values, headers)
 
 
 if __name__ == "__main__":
-    init()
-    create_table(True, "brand", "products", ["brand"], ["_id", "brand"])
-    create_table(True, "category", "products", ["category"], ["_id", "category"])
-    create_table(True, "sub_category", "products", ["sub_category"], ["_id", "sub_category"])
-    create_table(True, "sub_sub_category", "products", ["category"], ["_id", "sub_sub_category"])
-    create_table(True, "color", "products", ["color"], ["_id", "color"])
-    create_table(True, "gender", "products", ["gender"], ["_id", "gender"])
-    create_table(False, "profiles", "profiles", ["recommendations-segment", "order-count"], ["_id", "recommendation_segment", "order_count"])
-    create_table(False, "sessions", "sessions", ["has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], ["sessions_id", "has_sale", "device_family", "device_brand", "os", "profid"], link_profile_session)
+    # init()
+    # create_table(True, "brand", "products", ["x", "brand"], ["_id", "brand"])
+    # create_table(True, "category", "products", ["x", "category"], ["_id", "category"])
+    # create_table(True, "sub_category", "products", ["x", "sub_category"], ["_id", "sub_category"])
+    # create_table(True, "sub_sub_category", "products", ["x", "category"], ["_id", "sub_sub_category"])
+    # create_table(True, "color", "products", ["x", "color"], ["_id", "color"])
+    # create_table(True, "gender", "products", ["x", "gender"], ["_id", "gender"])
+    # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"], ["_id", "recommendation_segment", "order_count"])
+    # create_table(False, "sessions", "sessions", ["has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], ["sessions_id", "has_sale", "device_family", "device_brand", "os", "profid"], link_profile_session)
+    cursor.close()
     cnx.close()

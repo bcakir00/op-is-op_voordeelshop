@@ -1,0 +1,999 @@
+_id,brand
+0,8x4
+1,1Auto
+2,Agfa
+3,Airwick
+4,Ajax
+5,Alpifresh
+6,Always
+7,Ambi Pur
+8,Amando
+9,Andrelon
+10,Apollo
+11,Aquafresh
+12,Argan
+13,At Home
+14,Bio-Oil
+15,Bodysecret
+16,Capri-Sun
+17,BodyX
+18,Clean
+19,Dettol
+20,Colgate
+21,Dove
+22,L Oreal
+23,Fa
+24,Head And Shoulders
+25,KFS-B-Candles
+26,Napisan
+27,Nivea
+28,Oral-B
+29,Palmolive
+30,Axe
+31,Gillette
+32,Schwarzkopf
+33,Herbal
+34,Neutral
+35,Blue Wonder
+36,Bright
+37,Byphasse
+38,Denim
+39,Diadermine
+40,Goldline
+41,Kinder
+42,Lip Smacker
+43,Libresse
+44,Loda
+45,Montagne Jeunesse
+46,Brut
+47,Bolsius
+48,Dreft
+49,Dasty
+50,Farouk
+51,Herbal Essences
+52,Listerine
+53,Nicols
+54,Glorix
+55,Pampers
+56,Bel Cosmetic
+57,Brylcreem
+58,Doctor Clean
+59,Glycerona
+60,Hansaplast
+61,Promo
+62,King
+63,Lenor
+64,Ooops
+65,Brise
+66,Glade
+67,Johnsons
+68,Kneipp
+69,Minions
+70,Op is Op
+71,Bref
+72,Cif
+73,Dash
+74,Dumil
+75,Durex
+76,Cleany
+77,Hero
+78,OB
+79,Odorex
+80,BIC
+81,Dixan
+82,Elmex
+83,HL Agenturen
+84,Mars
+85,Lactacyd
+86,Catisfactions
+87,Labello
+88,Disney
+89,
+90,Baby
+91,Badedas
+92,Gemar Balloons
+93,Bargje Big
+94,Bath Fizzer
+95,Bathroom Solutions
+96,Victoria Beckham
+97,Ben10
+98,Best for your friend
+99,Beyonce
+100,Bien
+101,Bifi
+102,Bigen
+103,Biotex
+104,Biotanicus
+105,Biotin & Collagen
+106,Blue Stratos
+107,Bon Giorno
+108,Bright Eyes
+109,Bruno Banani
+110,Burberry
+111,Cadbury
+112,Calvin Klein
+113,Celine Dion
+114,Chaudfontaine
+115,Chopard
+116,Chupa Chups
+117,Clearasil
+118,Coca-Cola
+119,Robijn
+120,Coccolino
+121,Creation
+122,David Beckham
+123,Davidoff
+124,Davitamon
+125,Demak Up
+126,Denterest
+127,Dermolin
+128,Dermomed
+129,Dorall
+130,Entity
+131,Garnier
+132,Guess
+133,Lifes Up
+134,Laser
+135,Lion
+136,Maybelline
+137,MB
+138,Mentos
+139,Olaz
+140,Playboy
+141,Sanex
+142,Rio
+143,Sebamed
+144,Sensodyne
+145,Shirley
+146,Shirley May
+147,Spa Secrets
+148,Syoss
+149,Van Gils
+150,De Vergulde Hand
+151,Vogue
+152,Wilkinson
+153,Nutrilon
+154,Nestle
+155,Rexona
+156,Therme
+157,Tommy Hilfiger
+158,Adelante
+159,Sence
+160,Pure Buddha
+161,Purol
+162,Sagrotan
+163,Savon Doux Classique
+164,Snickers
+165,Sorbo
+166,Stimul8
+167,Sun
+168,Sunil
+169,Twix
+170,Vaseline
+171,WC-Eend
+172,Wetties
+173,Zwitsal
+174,Ariel
+175,Bransus
+176,Finish
+177,Lucovitaal
+178,Melkmeisje
+179,Silan
+180,Toy Joy
+181,Aroma Di Rogito
+182,Floratex
+183,Adidas
+184,Andy
+185,Biodermal
+186,Body treatment
+187,Dr Van Der Hoog
+188,Dubro
+189,Duracell
+190,Embrace
+191,Gehwol
+192,Groenland
+193,Harpic
+194,Kleenex
+195,Midalgan
+196,Maya
+197,Mr Muscle
+198,Nailner
+199,Nibro
+200,Omo
+201,Page
+202,Persil
+203,Philips
+204,Prodent
+205,Proset
+206,Pure&Care
+207,Backscratcher
+208,Scholl
+209,Soapy
+210,Thomas
+211,Unicura
+212,Vanish
+213,Varta
+214,Vapona
+215,Wella
+216,Whiskas
+217,Joy Division
+218,Lipton
+219,Studio Line
+220,Hegron
+221,Inecto
+222,Umbro
+223,AA
+224,Cillit Bang
+225,Carin Haircosmetics
+226,Fanta
+227,Jordan
+228,ORS
+229,Plackers
+230,Veet
+231,Oreo
+232,Soundlogic
+233,Big Soft
+234,Black & Red
+235,Sesamstraat
+236,Riesen
+237,NESCAFE
+238,Saffron
+239,Royal Cosmetic Connections
+240,Steradent
+241,Tea Tree
+242,Actif
+243,Alpecin
+244,Aquarius
+245,Atrix
+246,Autodrop
+247,Bounty Mini
+248,Herbamedicus
+249,Shine
+250,Parodontax
+251,Pledge
+252,Rakker
+253,Pedigree
+254,Dentalcare
+255,Prokennex
+256,Rident
+257,Sudocrem
+258,Sunlight
+259,Swiffer
+260,Tena
+261,Theramed
+262,Vileda
+263,Vinolia
+264,Zendium
+265,Buisman
+266,Dente Dura
+267,Lowboys
+268,Lu
+269,Pringles
+270,Salvequick
+271,Sanicur
+272,Siderius
+273,Calgon
+274,Cillit
+275,Croc
+276,Max Brands
+277,Kitekat
+278,Sanrio
+279,Lafita
+280,Maja
+281,Esprit
+282,Gel Beads
+283,Fittydent
+284,HCA
+285,Kylie
+286,NUK
+287,Gloria Vanderbilt
+288,Vernel
+289,Bye Bites
+290,W7
+291,Rimmel
+292,Candy
+293,O Neill
+294,Dutch Originals
+295,Dylon
+296,Elizabeth Arden
+297,Early Sign
+298,Essential Organics
+299,Fishermans
+300,Fresh Up
+301,Fortuin
+302,Fruittella
+303,Fruity Sensation
+304,Giorgio Beverly Hills
+305,Guhl
+306,Haribo
+307,Sito
+308,Heathcote & Ivory
+309,Huggies
+310,Iceberg
+311,Jaguar
+312,Jean Marc
+313,Jean Paul Gaultier
+314,John Frieda
+315,Joop
+316,Jumbo
+317,Kappa
+318,Kate Moss
+319,Katja
+320,KC Oxid
+321,Kinder Bueno
+322,Ballon
+323,Kotex
+324,Kylie Minogue
+325,La Paay
+326,Le Jardin
+327,Laura Biagiotti
+328,Marbert
+329,Studio 100
+330,CL
+331,Mega Mindy
+332,Meridol
+333,Mexx
+334,Mickey & Minnie
+335,Milky Way
+336,Parfum De Fleur
+337,Monster High
+338,Moshi
+339,Mind Candy
+340,Murrays
+341,Nina Ricci
+342,Nu Nile
+343,Oldtimers
+344,Impliva
+345,Pantene
+346,Paul Frank
+347,Plantur
+348,Predictor
+349,Junior Elf
+350,Protex
+351,XL-S
+352,Yours
+353,Zirh
+354,Autan
+355,Dextro
+356,Ibex
+357,Issey Miyake
+358,Lolita Lempicka
+359,Pierre Cardin
+360,Red Band
+361,Silk
+362,Stimorol
+363,Studio
+364,Tesori d'Oriente
+365,Jil Sander
+366,Citronella
+367,Choco Time
+368,K2r
+369,Xpel Hair Cair
+370,Mr Proper
+371,Dales & Dunes
+372,Olay
+373,Savon
+374,FCUK
+375,Cacharel
+376,Dolce en Gabbana
+377,Quick
+378,Rayovac
+379,Red Bull
+380,Sence Beauty Time
+381,Seashell
+382,Sence Beauty
+383,Sheba
+384,Siglitos
+385,Skittles
+386,Slava Zaitsev
+387,SoftSocks
+388,Sportlife
+389,Sprite
+390,Mimosa
+391,Tefal
+392,Splash
+393,Toys4You
+394,Travelagent
+395,Ultra
+396,Venco
+397,Walking Socks
+398,Werthers Original
+399,Wipp
+400,Compeed
+401,Advil
+402,Antigrippine
+403,Aspirine
+404,Azaron
+405,Bisolvon
+406,Citrosan
+407,HTP
+408,Nurofen
+409,Oscillococcinum
+410,Rennie
+411,Sinaspril
+412,Saridon
+413,Voltaren
+414,Calex
+415,Formule W
+416,Roter
+417,Imodium
+418,Britney Spears
+419,Nicotinell
+420,Prevalin
+421,Strepsils
+422,Luxe Star
+423,Cosmo
+424,Anta Flu
+425,Witte Reus
+426,Marletka
+427,Baylis and Harding
+428,Tic Tac
+429,Blistex
+430,KitKat
+431,Smarties
+432,Sky Candy
+433,SBT
+434,Milka
+435,Toblerone
+436,Elite Models
+437,Fine Luxury Soaps
+438,Pestalozzi Puzzle
+439,Queen Royale
+440,SterStyle
+441,Vasenol
+442,Heat Keeper
+443,Trachitol
+444,Xt-Luis
+445,M&M's
+446,My Happy Pets
+447,Spaas
+448,Balance
+449,Trolls
+450,Vibovit
+451,Thorntons
+452,Coop
+453,CB12
+454,Zocool
+455,Color
+456,Wash & Go
+457,EasyToys
+458,Easyglide
+459,Mullrose
+460,Christina Aguilera
+461,Australian
+462,Estee Florance
+463,Ritter Sport
+464,Daro
+465,Treffer
+466,Luxury
+467,Muchachomalo
+468,Febreze
+469,Maoam
+470,Premium Parts
+471,Baron
+472,Zazie
+473,Bional
+474,Kodak
+475,Tetesept
+476,UHU
+477,P&G Professional
+478,Duschdas
+479,Ohropax
+480,Spectrum
+481,Patty
+482,Bicycle Gear
+483,Lifetime
+484,Create It!
+485,PB
+486,Alpina
+487,Velpon
+488,Elegance
+489,Dunlop
+490,Betadine
+491,Primatour
+492,Norit
+493,5 99
+494,Sperti
+495,Zovirax
+496,Vicks
+497,VSM
+498,Dampo
+499,Aleve
+500,A Vogel
+501,Bepanthen
+502,Strepfen
+503,Nisska
+504,Canesten
+505,Gaviscon
+506,Oroclean
+507,Otalgan
+508,Tiger Balm
+509,Valdispert
+510,Black Onyx
+511,Home & Styling Collection
+512,Kledingroller
+513,Wasknijpers
+514,La Cucina
+515,Excellent Houseware
+516,Roundies
+517,ecovif
+518,Vegter
+519,DreamWorks
+520,Dutch Decor
+521,Rodeo
+522,Click&Fresh
+523,Aluflon
+524,Royal Konig
+525,Edet
+526,Domestos
+527,Canard
+528,Tristar
+529,Pro Garden
+530,FX Tools
+531,Bloemen
+532,Thermometer
+533,Nova
+534,Boek Specials Nederland
+535,ABK
+536,Work Socks
+537,Fixodent
+538,Diamond
+539,Excellent Dental Care
+540,Fleurus
+541,Vaporesse
+542,Max Factor
+543,Color Plus
+544,Activa
+545,Acord
+546,Storage Solutions
+547,Lastpak
+548,Turbo Maxx
+549,BenBits
+550,THM
+551,Benson Care
+552,Ultra Clean
+553,New Rebels
+554,Qura
+555,Mens Health
+556,Samenwerkende Apothekers
+557,DKNY
+558,SenceFresh
+559,Ceracraft
+560,Dolmen
+561,Old Spice
+562,WD-40
+563,Regis Stone
+564,Benson Tools
+565,Playtime
+566,Urban Junk
+567,Russky Kazak
+568,Kuschelweich
+569,Perfect Fit
+570,Iba Paris
+571,Voor Jou!
+572,Beauty Skin Care
+573,Magic Brush
+574,Frolic
+575,Evian
+576,The Marshmallow Company
+577,Real Time
+578,Kind Looks
+579,Sporty & Pink
+580,Night Canyon
+581,Home Basics
+582,Nouka
+583,JML
+584,Franck Provost
+585,Pure Plus
+586,Tricel Oxi
+587,Aloe Vera Fresh
+588,Beco
+589,Benson
+590,Calypso
+591,Deluxa
+592,grafix
+593,Antikal
+594,Replay
+595,DermaSel
+596,Blend-a-med
+597,Princess
+598,Piace Molto
+599,Piove
+600,Fisher-Price
+601,Meisterbach
+602,Who`s Hair
+603,Zantac
+604,Niquitin
+605,Jungle Formula
+606,Jaico
+607,Wartner
+608,Canderel
+609,Dextro Energy
+610,Tommee Tippee
+611,Ralph Lauren
+612,Sanders
+613,Perfectly Clear
+614,Op = Op Boeken
+615,Etui
+616,Dynamic Energy
+617,Pepi
+618,Writewell
+619,Polaroid
+620,Stahlex
+621,DLP
+622,Arterin
+623,Tantum
+624,Casio
+625,Stationery Neon
+626,Paw Patrol
+627,Spiderman
+628,Peppa Pig
+629,Snow Queen
+630,Batman
+631,Benson Office
+632,Runaway
+633,Dehghan
+634,Fun Outdoors
+635,QNT
+636,Ice Age
+637,Plant Protect
+638,Insect Trap
+639,Magic Door Mesh
+640,Canon
+641,Epson
+642,HP
+643,Earth Kiss
+644,Manhattan
+645,CSI
+646,Duyvis
+647,Maltesers
+648,Bamboo
+649,Tactic
+650,Sunware
+651,Marco Milano
+652,Bobble Off
+653,Fashion Professional
+654,Converse
+655,Imagebooks
+656,Fresh for Life
+657,Denivit
+658,Tempo
+659,Crocodor
+660,Interior Elegance
+661,Amefa
+662,Unico Plus
+663,Twingles
+664,JES collection
+665,Cartoon Network
+666,Kitchen Collection
+667,Dr. Care
+668,Safety
+669,Gillette Venus
+670,Marvel
+671,New Balance
+672,Astor
+673,Lief!
+674,Antonio Miro
+675,Ranex
+676,Toni&Guy
+677,Angry Birds
+678,Proud
+679,Studio Onszelf
+680,The Secret Life of Pets
+681,Partychimp
+682,Active Sports
+683,Burago
+684,Nickelodeon
+685,Masha and the Bear
+686,Smartwares
+687,Topcom
+688,Flamingo
+689,Kukident
+690,Dr. Swaab
+691,La Pelucheria
+692,SQZD
+693,Domior
+694,Belux
+695,Simpsons
+696,Deco
+697,Stewardess
+698,Lynx
+699,Erik van Klinken
+700,Eco Styler
+701,Opticalm
+702,HNP
+703,Brother
+704,Eleganza
+705,Modderman
+706,L'alerteur
+707,Around The Home
+708,Gold Rush
+709,Fritt
+710,Schogetten
+711,Pritt
+712,Schott Zwiesel
+713,Simba
+714,Bellson
+715,Storage Line
+716,Handy Mates
+717,Corega
+718,Evora
+719,Superdry
+720,Floppy
+721,Decostar
+722,CF Nails
+723,Symex
+724,Metal Mekanic
+725,Asmodee
+726,Play-Doh
+727,Mad Machines
+728,Playskool
+729,Home Edition
+730,Yokebe
+731,Grundig
+732,Klok
+733,Topmaxx
+734,Coral
+735,My Favorite Friends
+736,Knex
+737,Cresent
+738,Tex-Pert
+739,Beta Klus Box
+740,Findon
+741,Azoza
+742,Selina
+743,PlayBIG Bloxx
+744,Tigi
+745,Hakle
+746,Lay's
+747,Braun
+748,Elseve
+749,Clown Games
+750,Universal
+751,Food for Fun
+752,Easy Line
+753,Kwikkie
+754,Lufkin
+755,Trumpf
+756,Dr. Tom's
+757,Planters
+758,Little Lovelies
+759,Chewmaster
+760,Barbie
+761,Dickie Toys
+762,Footcare
+763,Odina
+764,Hit
+765,Gusta
+766,Kai Deng
+767,Wiss
+768,Vita
+769,Tresemme
+770,Hot Wheels
+771,Telefunken
+772,Cesar
+773,Hosti
+774,Pip Studio
+775,Bibi
+776,Block Tech
+777,Signal
+778,Icon
+779,This Is It
+780,Trendy Girlz
+781,Cosmetics to Go
+782,Care Plus
+783,Gimborn
+784,HeltiQ
+785,Leidapharm
+786,Norlevo
+787,Comfort Aid
+788,Bath & Shower
+789,Pepsodent
+790,Cuisinier Elegance
+791,Kiwi
+792,Marinex
+793,Fruttini
+794,Home & Deco
+795,Revlon
+796,Radox
+797,Lifebuoy
+798,Trufali�
+799,Intex
+800,Vidal Sassooon
+801,Lux
+802,Star Bright
+803,SBR
+804,Siro
+805,Like it a lot
+806,Bel Premium
+807,Dummy
+808,Sensitive
+809,Zaini
+810,Frozen
+811,Cars
+812,Denver
+813,Happy Chocolate
+814,Voetbal Inside
+815,Weekdeal
+816,Ideal
+817,Trespass
+818,Toffifee
+819,Pure
+820,Asco
+821,Funnycandy
+822,Taveners
+823,Felix
+824,Paris Riviera
+825,Cosmo Designs
+826,Wiko
+827,Samsung
+828,Play and Joy
+829,Nokia
+830,Alcatel
+831,Vince Design
+832,Op is Op Kids
+833,Peanuts
+834,Orange Elephant
+835,Breazz
+836,Aussie
+837,Proderm
+838,Top Juice
+839,Super Sports
+840,Chillfactor
+841,Bosch
+842,Softy
+843,Indoor Life
+844,Kinzo Garden
+845,KNVB
+846,Eurobed
+847,Op = Op Kids
+848,Antonio
+849,Guylian
+850,Xpel Oral Care
+851,Bestron
+852,DProduct4
+853,Starscent
+854,Grolsch
+855,Dell
+856,Lexro
+857,Daniel Hechter
+858,Libby Design
+859,DIY
+860,Leapp iPhone
+861,Black & White Cuisine
+862,Lifetime Garden
+863,Goldwell
+864,Orofluido
+865,Color  Me
+866,Inventum
+867,Hydro Clean
+868,Core Max
+869,Turbo Stick
+870,Gigaset
+871,Dalan D Olive
+872,Edco
+873,Lifetime Clean
+874,Diesel
+875,Heidi Klum
+876,Home and Away 2.0
+877,Bestway
+878,BBQ Collection
+879,Waterzone
+880,Eddy Toys
+881,Scatch
+882,Slazenger
+883,TomTom
+884,Fresh and Cold
+885,Hydroblast
+886,Puma
+887,Poly
+888,Pet's Unlimited
+889,Sappy
+890,Celebrations
+891,Leev
+892,Green Nature
+893,Vitory
+894,Jono Toys
+895,Probike
+896,Lebara
+897,Silen
+898,Selpak
+899,Outdoor Life
+900,Belflam
+901,My Little Pony
+902,Tonka
+903,DohVinci
+904,Continental Bakeries
+905,RefectoCil
+906,Atomic
+907,Nerf
+908,Air Dragon
+909,Envy
+910,N-Joy
+911,SexyHair
+912,Be Creativ
+913,Bison
+914,Diele
+915,Lonka
+916,Cheetos
+917,Kraft
+918,van der Meulen
+919,Quaker
+920,James Bond
+921,Chocoland
+922,Belvita
+923,Sgreasy
+924,Miffy
+925,Asus
+926,Strike Energy
+927,Grand Maestro Italiano
+928,Wahl
+929,Sunny
+930,Op is Op Toys
+931,Amstel
+932,Casibel
+933,Verkade
+934,Illy
+935,Seven For 7
+936,Vivess
+937,Bounty
+938,Funtastix
+939,Grab 'n Go
+940,mi ABC
+941,Pip&Nut
+942,Bolletje
+943,Doccio
+944,Rocky Mountains
+945,Gicopa
+946,Gummy Zone
+947,Fava Mill
+948,Love Bomb Cushion
+949,Oktoberfest
+950,Extreme Clean
+951,Zed Candy
+952,Gies
+953,IronWood
+954,Brew Monkey
+955,Resdan
+956,Zonnatura
+957,Nedac
+958,Lucy's Home
+959,Zensation
+960,Dunicec
+961,Bjorn Borg
+962,Dermalex
+963,Hasbro
+964,Famosa
+965,Fast and Furious
+966,Kiddymix
+967,Magnani Italy
+968,Candy Cane
+969,Reload
+970,Cafe Paris
+971,Mandemakers
+972,Thermo Heat
+973,De Ruiter
+974,Molens Banket
+975,Liga
+976,Familie Pos
+977,Rang
+978,Chio
+979,Meltums
+980,Hatchimals
+981,Molino
+982,Larco
+983,Chocomel
+984,GlitterPalz
+985,Navigator
+986,Brink
+987,Crococoll
+988,Sula
+989,Starlyf
+990,Thermo
+991,XL-S Medical
+992,Bavaria
+993,DubbelFrisss
+994,Marne
+995,Delhaize
+996,Mr. Cream
+997,Springing
