@@ -18,6 +18,7 @@ def get_values(normalized, collection, values, get_fk):
     normalized_list = []
     upload_values = []
     for entry in collection.find():
+        print(counter)
         upload = []
         for value in values:
             if value == "x":
@@ -61,34 +62,42 @@ def get_path(file_name):
     return abs_file_path
 
 
-def create_csv_file(table_name, upload_values, headers):
+def create_csv_file(table_name, upload_values):
     # Writing the upload values to a csv file.
     print(f"Creating the {table_name} database contents...")
     with open(get_path(table_name), 'w', newline='') as csvout:
-        writer = csv.DictWriter(csvout, fieldnames=headers)
-        writer.writeheader()
+        writer = csv.writer(csvout)
         for value in upload_values:
-            writer.writerow({'_id': value[0], 'brand': value[1]})
-    print(f"Finished creating and uploading the {table_name} database contents.")
+            writer.writerow(list(value))
+    print(f"Finished creating the {table_name} database contents.\n")
 
 
-def create_table(normalized, table_name, db_name, values, headers, get_fk=None):
+def create_table(normalized, table_name, db_name, values, get_fk=None):
     collection = db[db_name]
     cursor.execute(f"DELETE FROM {table_name};")
 
     upload_values = get_values(normalized, collection, values, get_fk)
-    create_csv_file(table_name, upload_values, headers)
+    create_csv_file(table_name, upload_values)
+
+
+def upload_file(file_name, table_name):
+    cursor.execute(f"DELETE FROM {table_name};")
+    with open(get_path(file_name)) as csvfile:
+        cursor.copy_expert("COPY " + table_name + " FROM STDIN DELIMITER ',' CSV HEADER", csvfile)
+    cnx.commit()
+    print(f"Uploaded {file_name}.csv to the {table_name} table.")
 
 
 if __name__ == "__main__":
     # init()
-    # create_table(True, "brand", "products", ["x", "brand"], ["_id", "brand"])
+    # create_table(True, "brand", "products", ["x", "brand"], ["_id", "brand"], )
     # create_table(True, "category", "products", ["x", "category"], ["_id", "category"])
     # create_table(True, "sub_category", "products", ["x", "sub_category"], ["_id", "sub_category"])
-    # create_table(True, "sub_sub_category", "products", ["x", "category"], ["_id", "sub_sub_category"])
+    # create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"], ["_id", "sub_sub_category"])
     # create_table(True, "color", "products", ["x", "color"], ["_id", "color"])
     # create_table(True, "gender", "products", ["x", "gender"], ["_id", "gender"])
     # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"], ["_id", "recommendation_segment", "order_count"])
     # create_table(False, "sessions", "sessions", ["has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], ["sessions_id", "has_sale", "device_family", "device_brand", "os", "profid"], link_profile_session)
+    upload_file("brand", "brand")
     cursor.close()
     cnx.close()

@@ -78,6 +78,13 @@ cur.execute("""CREATE TABLE previously_recommended
                 FOREIGN KEY (product_id) REFERENCES products (_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id));""")
 
+cur.execute("""CREATE TABLE product_recommendations
+                (_id INT PRIMARY KEY,
+                profile_id VARCHAR,
+                product_id VARCHAR,
+                FOREIGN KEY (profile_id) REFERENCES profiles (_id),
+                FOREIGN KEY (product_id) REFERENCES products (_id));""")
+
 c.commit()
 cur.close()
 c.close()
