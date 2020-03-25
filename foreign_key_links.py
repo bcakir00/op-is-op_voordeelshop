@@ -1,6 +1,6 @@
 from MongoDB_to_PostgreSQL import *
 
-buids = {}
+buids = ()
 
 
 def init():
