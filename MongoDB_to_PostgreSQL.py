@@ -21,17 +21,14 @@ def get_values(normalized, collection, values, get_fk):
     normalized_list = []
     upload_values = []
 
-    cur = collection.find(
-        {},
-        no_cursor_timeout=True
-    )
-    for entry in cur:
+    for entry in collection.find():
         if counter % 10000 == 0:
             print(counter)
             print("Time difference: ", time.time() - difference_time)
             difference_time = time.time()
 
         upload = []
+        value_index = 0
         for value in values:
             if value == "x":
                 upload = [counter]
@@ -45,11 +42,12 @@ def get_values(normalized, collection, values, get_fk):
                     array_value = None
                 upload.append(array_value)
             elif value == "?":
-                fk = get_fk(entry)
+                fk = get_fk[value_index](entry)
                 if fk == -1:
                     continue
                 else:
                     upload.append(fk)
+                value_index += 1
             else:
                 if value in entry:
                     if type(entry[value]) == bson.objectid.ObjectId:
@@ -71,7 +69,6 @@ def get_values(normalized, collection, values, get_fk):
         if counter == limit and not normalized and limit != -1:
             break
 
-    cur.close()
     return upload_values
 
 
@@ -86,8 +83,9 @@ def get_path(file_name):
 def create_csv_file(table_name, upload_values):
     # Writing the upload values to a csv file.
     print(f"Creating the {table_name} database contents...")
-    with open(get_path(table_name), 'w', newline='') as csvout:
+    with open(get_path(table_name), 'w', newline='', encoding='utf-8') as csvout:
         writer = csv.writer(csvout)
+        writer.writerow(list(upload_values[0]))
         for value in upload_values:
             writer.writerow(list(value))
     print(f"Finished creating the {table_name} database contents.\n")
@@ -118,8 +116,9 @@ if __name__ == "__main__":
     # create_table(True, "color", "products", ["x", "color"])
     # create_table(True, "gender", "products", ["x", "gender"])
     # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
-    create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], link_profile_session)
-    # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"])
-    # upload_file("brand", "brand")
+    create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], [link_profile_session])
+    # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
+    #             [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
+    upload_file("brand", "brand")
     cursor.close()
     cnx.close()
