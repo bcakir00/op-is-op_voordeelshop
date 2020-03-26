@@ -4,6 +4,7 @@ from foreign_key_links import *
 import bson
 import csv
 import os
+import time
 
 cnx = psycopg2.connect("dbname=huwebshop user=postgres password=postgres")  # TODO: edit this.
 cursor = cnx.cursor()
@@ -11,9 +12,11 @@ cursor = cnx.cursor()
 limit = -1
 client = MongoClient('localhost', 27017)
 db = client["huwebshop"]
+difference_time = time.time()
 
 
 def get_values(normalized, collection, values, get_fk):
+    global difference_time
     counter = 0
     normalized_list = []
     upload_values = []
@@ -23,8 +26,11 @@ def get_values(normalized, collection, values, get_fk):
         no_cursor_timeout=True
     )
     for entry in cur:
-        if counter % 1000 == 0:
+        if counter % 10000 == 0:
             print(counter)
+            print("Time difference: ", time.time() - difference_time)
+            difference_time = time.time()
+
         upload = []
         for value in values:
             if value == "x":
@@ -39,7 +45,11 @@ def get_values(normalized, collection, values, get_fk):
                     array_value = None
                 upload.append(array_value)
             elif value == "?":
-                upload.append(get_fk(entry))
+                fk = get_fk(entry)
+                if fk == -1:
+                    continue
+                else:
+                    upload.append(fk)
             else:
                 if value in entry:
                     if type(entry[value]) == bson.objectid.ObjectId:
@@ -49,10 +59,14 @@ def get_values(normalized, collection, values, get_fk):
                 else:
                     upload.append(None)
 
-        if not [i for i in upload if i in normalized_list] and normalized or not normalized:
+        if not normalized:
             upload_values.append(tuple(upload))
-            normalized_list.extend(upload)
             counter += 1
+        else:
+            if upload[1] not in normalized_list:
+                normalized_list.append(upload[1])
+                upload_values.append(tuple(upload))
+                counter += 1
 
         if counter == limit and not normalized and limit != -1:
             break
@@ -96,15 +110,16 @@ def upload_file(file_name, table_name):
 
 
 if __name__ == "__main__":
-    # init()
+    init()
     # create_table(True, "brand", "products", ["x", "brand"])
     # create_table(True, "category", "products", ["x", "category"])
     # create_table(True, "sub_category", "products", ["x", "sub_category"])
     # create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"])
     # create_table(True, "color", "products", ["x", "color"])
     # create_table(True, "gender", "products", ["x", "gender"])
-    create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
-    # create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], link_profile_session)
+    # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
+    create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], link_profile_session)
+    # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"])
     # upload_file("brand", "brand")
     cursor.close()
     cnx.close()

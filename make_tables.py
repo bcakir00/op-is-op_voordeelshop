@@ -26,6 +26,7 @@ cur.execute("DROP TABLE IF EXISTS products CASCADE")
 cur.execute("DROP TABLE IF EXISTS viewed_products CASCADE")
 cur.execute("DROP TABLE IF EXISTS products_bought CASCADE")
 cur.execute("DROP TABLE IF EXISTS previously_recommended CASCADE")
+cur.execute("DROP TABLE IF EXISTS product_recommendations CASCADE")
 
 cur.execute("""CREATE TABLE profiles
                 (_id VARCHAR PRIMARY KEY, 

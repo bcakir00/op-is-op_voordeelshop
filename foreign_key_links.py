@@ -22,12 +22,16 @@ def link_profile_session(entry):
     session_id = entry["buid"][0]
 
     while low <= high:
-        middle = (low + high) // 2
-        if buids[middle][0] == session_id:
-            return buids[middle][1]
-        elif buids[middle][0] > session_id:
-            high = middle - 1
-        else:
-            low = middle + 1
+        try:
+            middle = (low + high) // 2
+            if buids[middle][0] == session_id:
+                return buids[middle][1]
+            elif buids[middle][0] > session_id:
+                high = middle - 1
+            else:
+                low = middle + 1
+        except:
+            print("Skipping!", entry)
+            return -1
 
     return -1
