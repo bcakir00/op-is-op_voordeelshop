@@ -19,11 +19,11 @@ def get_values(normalized, collection, values, get_fk):
     upload_values = []
 
     cur = collection.find(
-        {"x": 1},
+        {},
         no_cursor_timeout=True
     )
     for entry in cur:
-        if counter % 10000 == 0:
+        if counter % 1000 == 0:
             print(counter)
         upload = []
         for value in values:
@@ -96,15 +96,15 @@ def upload_file(file_name, table_name):
 
 
 if __name__ == "__main__":
-    init()
+    # init()
     # create_table(True, "brand", "products", ["x", "brand"])
     # create_table(True, "category", "products", ["x", "category"])
     # create_table(True, "sub_category", "products", ["x", "sub_category"])
     # create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"])
     # create_table(True, "color", "products", ["x", "color"])
     # create_table(True, "gender", "products", ["x", "gender"])
-    # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
-    create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], link_profile_session)
+    create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
+    # create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], link_profile_session)
     # upload_file("brand", "brand")
     cursor.close()
     cnx.close()
