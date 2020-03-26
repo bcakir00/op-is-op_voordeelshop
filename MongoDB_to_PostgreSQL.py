@@ -43,10 +43,8 @@ def get_values(normalized, collection, values, get_fk):
                 upload.append(array_value)
             elif value == "?":
                 fk = get_fk[value_index](entry)
-                if fk == -1:
-                    continue
-                else:
-                    upload.append(fk)
+                fk = None if fk == -1 else fk
+                upload.append(fk)
                 value_index += 1
             else:
                 if value in entry:
@@ -108,7 +106,7 @@ def upload_file(file_name, table_name):
 
 
 if __name__ == "__main__":
-    init()
+    # init()
     # create_table(True, "brand", "products", ["x", "brand"])
     # create_table(True, "category", "products", ["x", "category"])
     # create_table(True, "sub_category", "products", ["x", "sub_category"])
@@ -118,7 +116,7 @@ if __name__ == "__main__":
     # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
     create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family", "user_agent-device-brand", "user_agent-os-familiy", "?"], [link_profile_session])
     # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
-    #             [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
-    upload_file("brand", "brand")
+    # [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
+    # upload_files("products", "products")
     cursor.close()
     cnx.close()
