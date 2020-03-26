@@ -17,7 +17,12 @@ def get_values(normalized, collection, values, get_fk):
     counter = 0
     normalized_list = []
     upload_values = []
-    for entry in collection.find(no_cursor_timeout=True):
+
+    cur = collection.find(
+        {"x": 1},
+        no_cursor_timeout=True
+    )
+    for entry in cur:
         if counter % 10000 == 0:
             print(counter)
         upload = []
@@ -52,6 +57,7 @@ def get_values(normalized, collection, values, get_fk):
         if counter == limit and not normalized and limit != -1:
             break
 
+    cur.close()
     return upload_values
 
 
