@@ -67,17 +67,17 @@ cur.execute("""CREATE TABLE viewed_products
 
 cur.execute("""CREATE TABLE products_bought
                 (_id INT PRIMARY KEY, 
-                product_id VARCHAR,
                 profile_id VARCHAR,
-                FOREIGN KEY (product_id) REFERENCES products (_id),
-                FOREIGN KEY (profile_id) REFERENCES profiles (_id));""")
+                product_id VARCHAR,
+                FOREIGN KEY (profile_id) REFERENCES profiles (_id),
+                FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE previously_recommended
                 (_id INT PRIMARY KEY, 
-                product_id VARCHAR,
                 profile_id VARCHAR,
-                FOREIGN KEY (product_id) REFERENCES products (_id),
-                FOREIGN KEY (profile_id) REFERENCES profiles (_id));""")
+                product_id VARCHAR,
+                FOREIGN KEY (profile_id) REFERENCES profiles (_id),
+                FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE product_recommendations
                 (_id INT PRIMARY KEY,

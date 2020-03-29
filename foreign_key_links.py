@@ -11,29 +11,25 @@ def get_buids():
     for entry in db["profiles"].find():
         if "buids" in entry:
             if len(entry["buids"]) > 0:
-                buids.append((entry["buids"][0], str(entry["_id"])))
+                for buid in entry["buids"]:
+                    buids.append((buid, str(entry["_id"])))
     buids.sort()
     print("Done with the setup of the buids.")
 
 
-def link_profile_session(entry):
+def link_buid(entry):
     low = 0
     high = len(buids) - 1
 
-    try:
-        session_id = entry["buid"][0]
-        while low <= high:
-                middle = (low + high) // 2
-                if buids[middle][0] == session_id:
-                    return buids[middle][1]
-                elif buids[middle][0] > session_id:
-                    high = middle - 1
-                else:
-                    low = middle + 1
-    except:
-        return -1
-
-    return -1
+    session_id = entry["buid"][0]
+    while low <= high:
+        middle = (low + high) // 2
+        if buids[middle][0] == session_id:
+            return buids[middle][1]
+        elif buids[middle][0] > session_id:
+            high = middle - 1
+        else:
+            low = middle + 1
 
 
 def get_normalized_tables_id(search_value, search_name):
@@ -47,42 +43,37 @@ def get_normalized_tables_id(search_value, search_name):
 
 
 def get_brand_id(entry):
-    try:
-        return get_normalized_tables_id(entry["brand"], "brand")
-    except:
-        return -1
+    return get_normalized_tables_id(entry["brand"], "brand")
 
 
 def get_category_id(entry):
-    try:
-        return get_normalized_tables_id(entry["category"], "category")
-    except:
-        return -1
+    return get_normalized_tables_id(entry["category"], "category")
 
 
 def get_sub_category_id(entry):
-    try:
-        return get_normalized_tables_id(entry["sub_category"], "sub_category")
-    except:
-        return -1
+    return get_normalized_tables_id(entry["sub_category"], "sub_category")
 
 
 def get_sub_sub_category_id(entry):
-    try:
-        return get_normalized_tables_id(entry["sub_sub_category"], "sub_sub_category")
-    except:
-        return -1
+    return get_normalized_tables_id(entry["sub_sub_category"], "sub_sub_category")
 
 
 def get_color_id(entry):
-    try:
-        return get_normalized_tables_id(entry["color"], "color")
-    except:
-        return -1
+    return get_normalized_tables_id(entry["color"], "color")
 
 
 def get_gender_id(entry):
-    try:
-        return get_normalized_tables_id(entry["gender"], "gender")
-    except:
-        return -1
+    return get_normalized_tables_id(entry["gender"], "gender")
+
+
+def bought_profile_id(entry):
+    if entry["has_sale"]:
+        return link_buid(entry)
+
+
+def bought_product_id(entry):
+    if entry["has_sale"]:
+        profile_id = link_buid(entry)
+        for product_index in range(len(entry["order"]["products"]) - 1):
+            upload_values.append((profile_id, entry["order"]["products"][product_index]["id"]))
+        return entry["order"]["products"][-1]["id"]

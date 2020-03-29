@@ -13,13 +13,13 @@ limit = -1
 client = MongoClient('localhost', 27017)
 db = client["huwebshop"]
 difference_time = time.time()
+upload_values = []
 
 
 def get_values(normalized, collection, values, get_fk):
     global difference_time
     counter = 0
     normalized_list = []
-    upload_values = []
 
     for entry in collection.find():
         if counter % 10000 == 0:
@@ -42,9 +42,10 @@ def get_values(normalized, collection, values, get_fk):
                     array_value = None
                 upload.append(array_value)
             elif value == "?":
-                fk = get_fk[value_index](entry)
-                fk = None if fk == -1 else fk
-                upload.append(fk)
+                try:
+                    upload.append(get_fk[value_index](entry))
+                except:
+                    upload.append(None)
                 value_index += 1
             else:
                 if value in entry:
@@ -90,6 +91,7 @@ def create_csv_file(table_name, upload_values):
 
 
 def create_table(normalized, table_name, db_name, values, get_fk=None):
+    global upload_values
     collection = db[db_name]
     cursor.execute(f"DELETE FROM {table_name};")
 
@@ -113,22 +115,23 @@ def upload_files():
 
 
 def create_tables():
-    create_table(True, "brand", "products", ["x", "brand"])
-    create_table(True, "category", "products", ["x", "category"])
-    create_table(True, "sub_category", "products", ["x", "sub_category"])
-    create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"])
-    create_table(True, "color", "products", ["x", "color"])
-    create_table(True, "gender", "products", ["x", "gender"])
-    create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
-    create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family",
-                "user_agent-device-brand", "user_agent-os-familiy", "?"], [link_profile_session])
-    create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
-                 [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
-    cursor.close()
-    cnx.close()
+    # create_table(True, "brand", "products", ["x", "brand"])
+    # create_table(True, "category", "products", ["x", "category"])
+    # create_table(True, "sub_category", "products", ["x", "sub_category"])
+    # create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"])
+    # create_table(True, "color", "products", ["x", "color"])
+    # create_table(True, "gender", "products", ["x", "gender"])
+    # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
+    # create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family",
+    #              "user_agent-device-brand", "user_agent-os-familiy", "?"], [link_buid])
+    # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
+    #              [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
+    create_table(False, "products_bought", "sessions", ["?", "?"], [bought_profile_id, bought_product_id])
 
 
 if __name__ == "__main__":
     init()
     create_tables()
-    upload_files()
+    # upload_files()
+    cursor.close()
+    cnx.close()
