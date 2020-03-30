@@ -40,6 +40,7 @@ cur.execute("""CREATE TABLE sessions
                 device_brand VARCHAR,
                 os VARCHAR,
                 profid VARCHAR,
+                session_duration INT,
                 FOREIGN KEY (profid) REFERENCES profiles (_id));""")
 
 cur.execute("""CREATE TABLE products
@@ -59,30 +60,30 @@ cur.execute("""CREATE TABLE products
                 FOREIGN KEY (gender_id) REFERENCES gender (_id));""")
 
 cur.execute("""CREATE TABLE viewed_products
-                (_id INT PRIMARY KEY, 
-                product_id VARCHAR,
+                (product_id VARCHAR,
                 profile_id VARCHAR,
+                PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id));""")
 
 cur.execute("""CREATE TABLE products_bought
-                (_id INT PRIMARY KEY, 
-                profile_id VARCHAR,
+                (profile_id VARCHAR,
                 product_id VARCHAR,
+                PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE previously_recommended
-                (_id INT PRIMARY KEY, 
-                profile_id VARCHAR,
+                (profile_id VARCHAR,
                 product_id VARCHAR,
+                PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE product_recommendations
-                (_id INT PRIMARY KEY,
-                profile_id VARCHAR,
+                (profile_id VARCHAR,
                 product_id VARCHAR,
+                PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
