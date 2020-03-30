@@ -84,3 +84,10 @@ def bought_product_id(entry):
         for product_index in range(len(entry["order"]["products"]) - 1):
             upload_values.append((profile_id, entry["order"]["products"][product_index]["id"]))
         return entry["order"]["products"][-1]["id"]
+
+
+def viewed_product_id(entry):
+    profile_id = str(entry["_id"])
+    for product_index in range(len(entry["recommendations"]["viewed_before"]) - 1):
+        upload_values.append((profile_id, entry["recommendations"]["viewed_before"][product_index]))
+    return entry["recommendations"]["viewed_before"][-1]
