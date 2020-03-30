@@ -32,6 +32,13 @@ def link_buid(entry):
             low = middle + 1
 
 
+def get_session_duration(entry):
+    start_time = entry["session_start"]
+    end_time = entry["session_end"]
+    duration = end_time - start_time
+    return int(duration.total_seconds())
+
+
 def get_normalized_tables_id(search_value, search_name):
     if search_value is not None:
         search_value = search_value.replace("'", "''")
