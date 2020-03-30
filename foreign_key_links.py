@@ -74,20 +74,37 @@ def get_gender_id(entry):
 
 
 def bought_profile_id(entry):
-    if entry["has_sale"]:
-        return link_buid(entry)
+    try:
+        if entry["has_sale"]:
+            profile_id = link_buid(entry)
+            return profile_id if profile_id is not None else -1
+        else:
+            return -1
+    except:
+        return -1
 
 
 def bought_product_id(entry):
-    if entry["has_sale"]:
-        profile_id = link_buid(entry)
-        for product_index in range(len(entry["order"]["products"]) - 1):
-            upload_values.append((profile_id, entry["order"]["products"][product_index]["id"]))
-        return entry["order"]["products"][-1]["id"]
+    try:
+        if entry["has_sale"] and len(entry["order"]["products"]) >= 1:
+            profile_id = link_buid(entry)
+            for product_index in range(len(entry["order"]["products"]) - 1):
+                upload_values.append((profile_id, entry["order"]["products"][product_index]["id"]))
+            return entry["order"]["products"][-1]["id"]
+        else:
+            return -1
+    except:
+        return -1
 
 
 def viewed_product_id(entry):
-    profile_id = str(entry["_id"])
-    for product_index in range(len(entry["recommendations"]["viewed_before"]) - 1):
-        upload_values.append((profile_id, entry["recommendations"]["viewed_before"][product_index]))
-    return entry["recommendations"]["viewed_before"][-1]
+    try:
+        if entry["recommendations"]["viewed_before"]:
+            profile_id = str(entry["_id"])
+            for product_index in range(len(entry["recommendations"]["viewed_before"]) - 1):
+                upload_values.append((profile_id, entry["recommendations"]["viewed_before"][product_index]))
+            return entry["recommendations"]["viewed_before"][-1]
+        else:
+            return -1
+    except:
+        return -1

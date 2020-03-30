@@ -23,7 +23,7 @@ def get_values(normalized, collection, values, get_fk):
 
     for entry in collection.find():
         if counter % 10000 == 0:
-            print(counter)
+            print("Counter: ", counter)
             print("Time difference: ", time.time() - difference_time)
             difference_time = time.time()
 
@@ -57,8 +57,9 @@ def get_values(normalized, collection, values, get_fk):
                     upload.append(None)
 
         if not normalized:
-            upload_values.append(tuple(upload))
-            counter += 1
+            if -1 not in upload:
+                upload_values.append(tuple(upload))
+                counter += 1
         else:
             if upload[1] not in normalized_list:
                 normalized_list.append(upload[1])
@@ -125,13 +126,13 @@ def create_tables():
     # create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family",
     #             "user_agent-device-brand", "user_agent-os-familiy", "?", "?"], [link_buid, get_session_duration])
     # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
-    #              [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
-    create_table(False, "viewed_products", "profiles", ["_id", "?"], [viewed_product_id])
-    # create_table(False, "products_bought", "sessions", ["?", "?"], [bought_profile_id, bought_product_id])
+    #             [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
+    # create_table(False, "viewed_products", "profiles", ["_id", "?"], [viewed_product_id])
+    create_table(False, "products_bought", "sessions", ["?", "?"], [bought_profile_id, bought_product_id])
 
 
 if __name__ == "__main__":
-    # init()
+    init()
     create_tables()
     # upload_files()
     cursor.close()
