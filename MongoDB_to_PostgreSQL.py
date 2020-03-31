@@ -102,13 +102,13 @@ def create_table(normalized, table_name, db_name, values, get_fk=None):
 
 def upload_files():
     file_names = ["brand", "category", "sub_category", "sub_sub_category", "color", "gender",
-                  "profiles", "sessions", "viewed_products", "products_bought", "previously_recommended"]
+                  "products", "profiles", "sessions"]
 
     for file_name in file_names:
         try:
             cursor.execute(f"TRUNCATE {file_name} CASCADE;")
             with open(get_path(file_name)) as csvfile:
-                cursor.copy_expert("COPY " + file_name + " FROM STDIN DELIMITER ',' CSV HEADER", csvfile)
+                cursor.copy_expert("COPY " + file_name + " FROM STDIN DELIMITER ',' CSV HEADER;", csvfile)
             cnx.commit()
             print(f"Uploaded {file_name}.csv to the {file_name} table.")
         except FileNotFoundError:
@@ -116,24 +116,24 @@ def upload_files():
 
 
 def create_tables():
-    # create_table(True, "brand", "products", ["x", "brand"])
-    # create_table(True, "category", "products", ["x", "category"])
-    # create_table(True, "sub_category", "products", ["x", "sub_category"])
-    # create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"])
-    # create_table(True, "color", "products", ["x", "color"])
-    # create_table(True, "gender", "products", ["x", "gender"])
-    # create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
-    # create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family",
-    #             "user_agent-device-brand", "user_agent-os-familiy", "?", "?"], [link_buid, get_session_duration])
-    # create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
-    #             [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
-    # create_table(False, "viewed_products", "profiles", ["_id", "?"], [viewed_product_id])
+    create_table(True, "brand", "products", ["x", "brand"])
+    create_table(True, "category", "products", ["x", "category"])
+    create_table(True, "sub_category", "products", ["x", "sub_category"])
+    create_table(True, "sub_sub_category", "products", ["x", "sub_sub_category"])
+    create_table(True, "color", "products", ["x", "color"])
+    create_table(True, "gender", "products", ["x", "gender"])
+    create_table(False, "profiles", "profiles", ["_id", "recommendations-segment", "order-count"])
+    create_table(False, "sessions", "sessions", ["_id", "has_sale", "user_agent-device-family",
+                 "user_agent-device-brand", "user_agent-os-familiy", "?", "?"], [link_buid, get_session_duration])
+    create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
+                 [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
+    create_table(False, "viewed_products", "profiles", ["_id", "?"], [viewed_product_id])
     create_table(False, "products_bought", "sessions", ["?", "?"], [bought_profile_id, bought_product_id])
 
 
 if __name__ == "__main__":
-    init()
-    create_tables()
-    # upload_files()
+    # init()
+    # create_tables()
+    upload_files()
     cursor.close()
     cnx.close()

@@ -60,8 +60,8 @@ cur.execute("""CREATE TABLE products
                 FOREIGN KEY (gender_id) REFERENCES gender (_id));""")
 
 cur.execute("""CREATE TABLE viewed_products
-                (product_id VARCHAR,
-                profile_id VARCHAR,
+                (profile_id VARCHAR,
+                product_id VARCHAR,
                 PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id));""")
