@@ -9,16 +9,15 @@ import time
 cnx = psycopg2.connect("dbname=huwebshop user=postgres password=postgres")  # TODO: edit this.
 cursor = cnx.cursor()
 
-limit = -1
 client = MongoClient('localhost', 27017)
 db = client["huwebshop"]
 difference_time = time.time()
 upload_values = []
+counter = 0
 
 
 def get_values(normalized, collection, values, get_fk):
-    global difference_time
-    counter = 0
+    global difference_time, counter
     normalized_list = []
 
     for entry in collection.find():
@@ -66,9 +65,6 @@ def get_values(normalized, collection, values, get_fk):
                 upload_values.append(tuple(upload))
                 counter += 1
 
-        if counter == limit and not normalized and limit != -1:
-            break
-
     return upload_values
 
 
@@ -80,7 +76,7 @@ def get_path(file_name):
     return abs_file_path
 
 
-def create_csv_file(table_name, upload_values):
+def create_csv_file(table_name):
     # Writing the upload values to a csv file.
     print(f"Creating the {table_name} database contents...")
     with open(get_path(table_name), 'w', newline='', encoding='utf-8') as csvout:
@@ -97,7 +93,7 @@ def create_table(normalized, table_name, db_name, values, get_fk=None):
     cursor.execute(f"DELETE FROM {table_name};")
 
     upload_values = get_values(normalized, collection, values, get_fk)
-    create_csv_file(table_name, upload_values)
+    create_csv_file(table_name)
 
 
 def upload_files():
@@ -109,6 +105,25 @@ def upload_files():
             cursor.execute(f"TRUNCATE {file_name} CASCADE;")
             with open(get_path(file_name)) as csvfile:
                 cursor.copy_expert("COPY " + file_name + " FROM STDIN DELIMITER ',' CSV HEADER;", csvfile)
+            cnx.commit()
+            print(f"Uploaded {file_name}.csv to the {file_name} table.")
+        except FileNotFoundError:
+            print(f"{file_name} could not be located.")
+
+
+def upload_problem_files():
+    file_names = ["products_bought"]
+    cursor.execute("DROP TABLE IF EXISTS placeholder CASCADE")
+    cursor.execute("""CREATE TABLE placeholder (_id VARCHAR PRIMARY KEY, column1 VARCHAR, column2 VARCHAR);""")
+
+    for file_name in file_names:
+        try:
+            cursor.execute(f"TRUNCATE {file_name} CASCADE;")
+            with open(get_path(file_name)) as csvfile:
+                cursor.copy_expert("COPY placeholder FROM STDIN DELIMITER ',' CSV HEADER;", csvfile)
+            cursor.execute(f"INSERT INTO {file_name} (_id, profile_id, product_id)"
+                           f"SELECT p._id, p.column1, p.column2 FROM placeholder AS p INNER JOIN products ON p._id = products._id")
+            cursor.execute("DROP TABLE IF EXISTS placeholder CASCADE")
             cnx.commit()
             print(f"Uploaded {file_name}.csv to the {file_name} table.")
         except FileNotFoundError:
@@ -127,13 +142,14 @@ def create_tables():
                  "user_agent-device-brand", "user_agent-os-familiy", "?", "?"], [link_buid, get_session_duration])
     create_table(False, "products", "products", ["_id", "?", "?", "?", "?", "?", "?", "price-selling_price"],
                  [get_brand_id, get_category_id, get_sub_category_id, get_sub_sub_category_id, get_color_id, get_gender_id])
-    create_table(False, "viewed_products", "profiles", ["_id", "?"], [viewed_product_id])
-    create_table(False, "products_bought", "sessions", ["?", "?"], [bought_profile_id, bought_product_id])
+    create_table(False, "viewed_products", "profiles", ["x", "_id", "?"], [viewed_product_id])
+    create_table(False, "products_bought", "sessions", ["x", "?", "?"], [bought_profile_id, bought_product_id])
 
 
 if __name__ == "__main__":
     # init()
     # create_tables()
     upload_files()
+    upload_problem_files()
     cursor.close()
     cnx.close()

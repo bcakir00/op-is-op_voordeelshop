@@ -60,30 +60,31 @@ cur.execute("""CREATE TABLE products
                 FOREIGN KEY (gender_id) REFERENCES gender (_id));""")
 
 cur.execute("""CREATE TABLE viewed_products
-                (profile_id VARCHAR,
+                (_id VARCHAR PRIMARY KEY,
+                profile_id VARCHAR,
                 product_id VARCHAR,
-                PRIMARY KEY (profile_id, product_id),
-                FOREIGN KEY (product_id) REFERENCES products (_id),
-                FOREIGN KEY (profile_id) REFERENCES profiles (_id));""")
+                FOREIGN KEY (profile_id) REFERENCES profiles (_id),
+                FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE products_bought
-                (profile_id VARCHAR,
+                (_id VARCHAR PRIMARY KEY,
+                profile_id VARCHAR,
                 product_id VARCHAR,
-                PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE previously_recommended
-                (profile_id VARCHAR,
+                (_id VARCHAR PRIMARY KEY,
+                profile_id VARCHAR,
                 product_id VARCHAR,
-                PRIMARY KEY (profile_id, product_id),
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE product_recommendations
-                (profile_id VARCHAR,
+                (_id VARCHAR PRIMARY KEY,
+                profile_id VARCHAR,
                 product_id VARCHAR,
-                PRIMARY KEY (profile_id, product_id),
+                recommendation_place INT,
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 

@@ -99,10 +99,12 @@ def bought_product_id(entry):
 
 def viewed_product_id(entry):
     try:
+        global counter
         if entry["recommendations"]["viewed_before"]:
             profile_id = str(entry["_id"])
             for product_index in range(len(entry["recommendations"]["viewed_before"]) - 1):
                 upload_values.append((profile_id, entry["recommendations"]["viewed_before"][product_index]))
+                counter += 1
             return entry["recommendations"]["viewed_before"][-1]
         else:
             return -1
