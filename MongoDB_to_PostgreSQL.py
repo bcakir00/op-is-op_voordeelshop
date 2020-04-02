@@ -98,36 +98,35 @@ def create_table(normalized, table_name, db_name, values, get_fk=None):
 
 def upload_files():
     file_names = ["brand", "category", "sub_category", "sub_sub_category", "color", "gender",
-                  "products", "profiles", "sessions"]
+                  "products", "profiles", "sessions", "products_bought", "viewed_products"]
+    problem_files = [9, 10]
 
-    for file_name in file_names:
+    for file_index in range(len(file_names)):
+        file_name = file_names[file_index]
+        # Making a placeholder table to go around the constraints because of the imperfect data.
+        cursor.execute("DROP TABLE IF EXISTS placeholder CASCADE")
+        cursor.execute("""CREATE TABLE placeholder (_id VARCHAR PRIMARY KEY, column1 VARCHAR, column2 VARCHAR);""")
+        cnx.commit()
+
         try:
             cursor.execute(f"TRUNCATE {file_name} CASCADE;")
             with open(get_path(file_name)) as csvfile:
-                cursor.copy_expert("COPY " + file_name + " FROM STDIN DELIMITER ',' CSV HEADER;", csvfile)
-            cnx.commit()
+                table_name = file_name if file_index not in problem_files else "placeholder"
+                cursor.copy_expert("COPY " + table_name + " FROM STDIN DELIMITER ',' CSV HEADER;", csvfile)
+                cnx.commit()
+
+            if file_index in problem_files:
+                cursor.execute(f"INSERT INTO {file_name} (_id, profile_id, product_id) SELECT p._id, p.column1, "
+                               f"p.column2 FROM placeholder AS p INNER JOIN products ON p.column2 = products._id")
+                cnx.commit()
+
             print(f"Uploaded {file_name}.csv to the {file_name} table.")
         except FileNotFoundError:
             print(f"{file_name} could not be located.")
 
-
-def upload_problem_files():
-    file_names = ["products_bought"]
+    # Deleting the temporary table and committing the uploads.
     cursor.execute("DROP TABLE IF EXISTS placeholder CASCADE")
-    cursor.execute("""CREATE TABLE placeholder (_id VARCHAR PRIMARY KEY, column1 VARCHAR, column2 VARCHAR);""")
-
-    for file_name in file_names:
-        try:
-            cursor.execute(f"TRUNCATE {file_name} CASCADE;")
-            with open(get_path(file_name)) as csvfile:
-                cursor.copy_expert("COPY placeholder FROM STDIN DELIMITER ',' CSV HEADER;", csvfile)
-            cursor.execute(f"INSERT INTO {file_name} (_id, profile_id, product_id)"
-                           f"SELECT p._id, p.column1, p.column2 FROM placeholder AS p INNER JOIN products ON p._id = products._id")
-            cursor.execute("DROP TABLE IF EXISTS placeholder CASCADE")
-            cnx.commit()
-            print(f"Uploaded {file_name}.csv to the {file_name} table.")
-        except FileNotFoundError:
-            print(f"{file_name} could not be located.")
+    cnx.commit()
 
 
 def create_tables():
@@ -150,6 +149,5 @@ if __name__ == "__main__":
     # init()
     # create_tables()
     upload_files()
-    upload_problem_files()
     cursor.close()
     cnx.close()
