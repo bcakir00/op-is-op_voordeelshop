@@ -60,31 +60,30 @@ cur.execute("""CREATE TABLE products
                 FOREIGN KEY (gender_id) REFERENCES gender (_id));""")
 
 cur.execute("""CREATE TABLE viewed_products
-                (_id VARCHAR PRIMARY KEY,
+                (_id SERIAL PRIMARY KEY,
                 profile_id VARCHAR,
                 product_id VARCHAR,
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE products_bought
-                (_id VARCHAR PRIMARY KEY,
+                (_id SERIAL PRIMARY KEY,
                 profile_id VARCHAR,
                 product_id VARCHAR,
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE previously_recommended
-                (_id VARCHAR PRIMARY KEY,
+                (_id SERIAL PRIMARY KEY,
                 profile_id VARCHAR,
                 product_id VARCHAR,
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
 cur.execute("""CREATE TABLE product_recommendations
-                (_id VARCHAR PRIMARY KEY,
+                (_id SERIAL PRIMARY KEY,
                 profile_id VARCHAR,
                 product_id VARCHAR,
-                recommendation_place INT,
                 FOREIGN KEY (profile_id) REFERENCES profiles (_id),
                 FOREIGN KEY (product_id) REFERENCES products (_id));""")
 
